@@ -50,11 +50,15 @@
   ([x] (- x))
   ([x y] (- x y)))
 
-(defn count-params [x]
-  :-)
+(defn count-params
+  ([& more] (let [counter (fn [x y] (inc x))]
+              (reduce counter 0 more))))
 
-(defn my-* [x]
-  :-)
+(defn my-*
+  ([] 1)
+  ([x] x)
+  ([x y] (* x y))
+  ([x y & more] (reduce my-* (my-* x y) more)))
 
 (defn pred-and [x]
   (fn [x] :-))
